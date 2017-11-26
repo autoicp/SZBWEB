@@ -15,34 +15,23 @@ public class UserServiceImpl implements UserService{
 	@Resource  
     private UserMapper userMapper;
 
-	public int deleteByChatId(String chatId) {
-		// TODO Auto-generated method stub
-		User user = new User();
-		user.setChatId(chatId);
-//		return this.userMapper.deleteByChatId(user);
-		return 1;
+	public int deleteByPrimaryKey(String id) {
+		return this.userMapper.deleteByPrimaryKey(id);
 	}
 
 	public int insert(User user) {
-		// TODO Auto-generated method stub
-
 		return this.userMapper.insert(user);
 	}
 
-	public User selectByChatId(String chatId) {
-		// TODO Auto-generated method stub
-		User user = new User();
-		user.setChatId(chatId);
-//		return this.userMapper.selectByChatId(user);
-		return null;
+	public User selectByPrimaryKey(String id) {
+		return this.userMapper.selectByPrimaryKey(id);
 	}
 
-	public int updateByChatIdSelective(User user) {
-		// TODO Auto-generated method stub
-//		return this.userMapper.updateByChatIdSelective(user);
-		return 1;
+	public int updateByPrimaryKeySelective(User user) {
+		return this.userMapper.updateByPrimaryKeySelective(user);
 	}
 
-
-
+	public User selectBySelective(User user) {
+		return this.userMapper.selectBySelective(user);
+	}
 }
