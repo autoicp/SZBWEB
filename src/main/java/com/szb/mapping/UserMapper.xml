@@ -42,91 +42,6 @@
       #{headPortraitAddress,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{registTime,jdbcType=TIMESTAMP}, 
       #{changeTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.szb.pojo.User" >
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        Id,
-      </if>
-      <if test="userName != null" >
-        userName,
-      </if>
-      <if test="telephone != null" >
-        telephone,
-      </if>
-      <if test="shopAddress != null" >
-        shopAddress,
-      </if>
-      <if test="homeAddress != null" >
-        homeAddress,
-      </if>
-      <if test="userType != null" >
-        userType,
-      </if>
-      <if test="chatId != null" >
-        chatId,
-      </if>
-      <if test="shopName != null" >
-        shopName,
-      </if>
-      <if test="qrCodeAddress != null" >
-        qrCodeAddress,
-      </if>
-      <if test="headPortraitAddress != null" >
-        headPortraitAddress,
-      </if>
-      <if test="nickName != null" >
-        nickName,
-      </if>
-      <if test="registTime != null" >
-        registTime,
-      </if>
-      <if test="changeTime != null" >
-        changeTime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="userName != null" >
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="telephone != null" >
-        #{telephone,jdbcType=VARCHAR},
-      </if>
-      <if test="shopAddress != null" >
-        #{shopAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="homeAddress != null" >
-        #{homeAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="userType != null" >
-        #{userType,jdbcType=VARCHAR},
-      </if>
-      <if test="chatId != null" >
-        #{chatId,jdbcType=VARCHAR},
-      </if>
-      <if test="shopName != null" >
-        #{shopName,jdbcType=VARCHAR},
-      </if>
-      <if test="qrCodeAddress != null" >
-        #{qrCodeAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="headPortraitAddress != null" >
-        #{headPortraitAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="nickName != null" >
-        #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="registTime != null" >
-        #{registTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="changeTime != null" >
-        #{changeTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.szb.pojo.User" >
     update user
     <set >
@@ -169,20 +84,48 @@
     </set>
     where Id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.szb.pojo.User" >
-    update user
-    set userName = #{userName,jdbcType=VARCHAR},
-      telephone = #{telephone,jdbcType=VARCHAR},
-      shopAddress = #{shopAddress,jdbcType=VARCHAR},
-      homeAddress = #{homeAddress,jdbcType=VARCHAR},
-      userType = #{userType,jdbcType=VARCHAR},
-      chatId = #{chatId,jdbcType=VARCHAR},
-      shopName = #{shopName,jdbcType=VARCHAR},
-      qrCodeAddress = #{qrCodeAddress,jdbcType=VARCHAR},
-      headPortraitAddress = #{headPortraitAddress,jdbcType=VARCHAR},
-      nickName = #{nickName,jdbcType=VARCHAR},
-      registTime = #{registTime,jdbcType=TIMESTAMP},
-      changeTime = #{changeTime,jdbcType=TIMESTAMP}
-    where Id = #{id,jdbcType=VARCHAR}
-  </update>
+  <select id="selectBySelective" resultType="com.szb.pojo.User" parameterType="com.szb.pojo.User">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    WHERE
+    <trim suffixOverrides=" and" >
+      <if test="userName != null" >
+        userName = #{userName,jdbcType=VARCHAR} and
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR} and
+      </if>
+      <if test="shopAddress != null" >
+        shopAddress = #{shopAddress,jdbcType=VARCHAR} and
+      </if>
+      <if test="homeAddress != null" >
+        homeAddress = #{homeAddress,jdbcType=VARCHAR} and
+      </if>
+      <if test="userType != null" >
+        userType = #{userType,jdbcType=VARCHAR} and
+      </if>
+      <if test="chatId != null" >
+        chatId = #{chatId,jdbcType=VARCHAR} and
+      </if>
+      <if test="shopName != null" >
+        shopName = #{shopName,jdbcType=VARCHAR} and
+      </if>
+      <if test="qrCodeAddress != null" >
+        qrCodeAddress = #{qrCodeAddress,jdbcType=VARCHAR} and
+      </if>
+      <if test="headPortraitAddress != null" >
+        headPortraitAddress = #{headPortraitAddress,jdbcType=VARCHAR} and
+      </if>
+      <if test="nickName != null" >
+        nickName = #{nickName,jdbcType=VARCHAR} and
+      </if>
+      <if test="registTime != null" >
+        registTime = #{registTime,jdbcType=TIMESTAMP} and
+      </if>
+      <if test="changeTime != null" >
+        changeTime = #{changeTime,jdbcType=TIMESTAMP} and
+      </if>
+    </trim>
+  </select>
 </mapper>
