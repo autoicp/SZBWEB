@@ -7,15 +7,13 @@ import com.szb.pojo.Record;
 
 public interface RecordService {
 
-	int deleteByHostChatIdAndFloatNum(String hostChatId, String floatNum);
+    int deleteByPrimaryKey(String id);
 
     int insert(Record record);
 
-    int updateByHostChatIdAndFloatNumSelective(Record record);
+    Record selectByPrimaryKey(String id);
 
-    List<Record> selectByHostChatIdAndPaymentStatus(String hostChatId, String paymentStatus);
-    
-    Record selectByHostChatIdAndFloatNum(String hostChatId, String floatNum);
-    
-    List<Record> selectByCustChatIdAndPaymentStatus(String custChatId, String paymentStatus);
+    List<Record> selectBySelective(Record record);
+
+    int updateByPrimaryKeySelective(Record record);
 }

@@ -3,11 +3,13 @@ package com.szb.service;
 import com.szb.pojo.User;
 
 public interface UserService {
-	int deleteByChatId(String chatId);
+    public int deleteByPrimaryKey(String id);
 
-    int insert(User user);
+    public int insert(User user);
 
-    User selectByChatId(String chatId);
+    public User selectByPrimaryKey(String id);
 
-    int updateByChatIdSelective(User record);
+    public User selectBySelective(User user);
+
+    public int updateByPrimaryKeySelective(User user);
 }
