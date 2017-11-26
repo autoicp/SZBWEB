@@ -11,6 +11,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>
@@ -41,7 +42,7 @@
 </div>
 <div class="new">
 </div>
-<form id="userform" method="post" action="${pageContext.request.contextPath}/user/usercenterdo">
+<form id="userform" method="post" action="${pageContext.request.contextPath}/user/usercenterdo" enctype="multipart/form-data">
     <div class="new box_app">
         <img src="${pageContext.request.contextPath}/img/usernameico.png"/>
         <span>&nbsp;姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</span><input id="userName" type="text"
@@ -63,11 +64,12 @@
     <div class="new box_app">
         <img src="${pageContext.request.contextPath}/img/qrcodeico.png"/>
         <span>&nbsp;收&nbsp;&nbsp;&nbsp;钱&nbsp;&nbsp;&nbsp;码：</span>
-        <div class="qrcodeico" id="addqrcode">
+        <div class="qrcodeico" id="addqrcode" >
             <img src="${pageContext.request.contextPath}/img/addqrcode.png"/><br/><br/>
             <span>添加收钱码</span>
         </div>
     </div>
+
     <div class="btn">
         <br/>
         <button class="btn_app btn_brown" id="btn" type="button" onclick="doSubmit()">完 成</button>
@@ -75,7 +77,7 @@
     <input type="hidden" name=" " value=""/>
     <input type="hidden" name=" " value=""/>
     <input type="hidden" name=" " value=""/>
-    <input id="qrcodefile" type="file" accept="image/*;capture=camera">
+    <input id="qrcodefile" type="file" accept="image/*;capture=camera" name="qrCode">
 
 </form>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
