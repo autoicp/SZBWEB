@@ -5,13 +5,12 @@ import com.szb.pojo.User;
 public interface UserMapper {
     int deleteByPrimaryKey(String id);
 
-    int insert(User record);
-
-    int insertSelective(User record);
+    int insert(User user);
 
     User selectByPrimaryKey(String id);
 
-    int updateByPrimaryKeySelective(User record);
+    User selectBySelective(User user);
 
-    int updateByPrimaryKey(User record);
+    int updateByPrimaryKeySelective(User user);
+
 }
