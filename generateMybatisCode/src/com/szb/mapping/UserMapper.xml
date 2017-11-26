@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.szb.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.szb.pojo.User" >
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="shopAddress" property="shopAddress" jdbcType="VARCHAR" />
+    <result column="homeAddress" property="homeAddress" jdbcType="VARCHAR" />
+    <result column="userType" property="userType" jdbcType="VARCHAR" />
+    <result column="chatId" property="chatId" jdbcType="VARCHAR" />
+    <result column="shopName" property="shopName" jdbcType="VARCHAR" />
+    <result column="qrCodeAddress" property="qrCodeAddress" jdbcType="VARCHAR" />
+    <result column="headPortraitAddress" property="headPortraitAddress" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickName" jdbcType="VARCHAR" />
+    <result column="registTime" property="registTime" jdbcType="TIMESTAMP" />
+    <result column="changeTime" property="changeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, userName, telephone, shopAddress, homeAddress, userType, chatId, shopName, 
+    qrCodeAddress, headPortraitAddress, nickName, registTime, changeTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.szb.pojo.User" >
+    insert into user (Id, userName, telephone, 
+      shopAddress, homeAddress, userType, 
+      chatId, shopName, qrCodeAddress, 
+      headPortraitAddress, nickName, registTime, 
+      changeTime)
+    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{shopAddress,jdbcType=VARCHAR}, #{homeAddress,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, 
+      #{chatId,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, #{qrCodeAddress,jdbcType=VARCHAR}, 
+      #{headPortraitAddress,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{registTime,jdbcType=TIMESTAMP}, 
+      #{changeTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.szb.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="userName != null" >
+        userName,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="shopAddress != null" >
+        shopAddress,
+      </if>
+      <if test="homeAddress != null" >
+        homeAddress,
+      </if>
+      <if test="userType != null" >
+        userType,
+      </if>
+      <if test="chatId != null" >
+        chatId,
+      </if>
+      <if test="shopName != null" >
+        shopName,
+      </if>
+      <if test="qrCodeAddress != null" >
+        qrCodeAddress,
+      </if>
+      <if test="headPortraitAddress != null" >
+        headPortraitAddress,
+      </if>
+      <if test="nickName != null" >
+        nickName,
+      </if>
+      <if test="registTime != null" >
+        registTime,
+      </if>
+      <if test="changeTime != null" >
+        changeTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAddress != null" >
+        #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null" >
+        #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="chatId != null" >
+        #{chatId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="qrCodeAddress != null" >
+        #{qrCodeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortraitAddress != null" >
+        #{headPortraitAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="registTime != null" >
+        #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeTime != null" >
+        #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szb.pojo.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAddress != null" >
+        shopAddress = #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null" >
+        homeAddress = #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        userType = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="chatId != null" >
+        chatId = #{chatId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        shopName = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="qrCodeAddress != null" >
+        qrCodeAddress = #{qrCodeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortraitAddress != null" >
+        headPortraitAddress = #{headPortraitAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nickName = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="registTime != null" >
+        registTime = #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeTime != null" >
+        changeTime = #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szb.pojo.User" >
+    update user
+    set userName = #{userName,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      shopAddress = #{shopAddress,jdbcType=VARCHAR},
+      homeAddress = #{homeAddress,jdbcType=VARCHAR},
+      userType = #{userType,jdbcType=VARCHAR},
+      chatId = #{chatId,jdbcType=VARCHAR},
+      shopName = #{shopName,jdbcType=VARCHAR},
+      qrCodeAddress = #{qrCodeAddress,jdbcType=VARCHAR},
+      headPortraitAddress = #{headPortraitAddress,jdbcType=VARCHAR},
+      nickName = #{nickName,jdbcType=VARCHAR},
+      registTime = #{registTime,jdbcType=TIMESTAMP},
+      changeTime = #{changeTime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.szb.dao.RecordMapper" >
+  <resultMap id="BaseResultMap" type="com.szb.pojo.Record" >
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="floatNum" property="floatNum" jdbcType="VARCHAR" />
+    <result column="hostChatId" property="hostChatId" jdbcType="VARCHAR" />
+    <result column="productName" property="productName" jdbcType="VARCHAR" />
+    <result column="productCounts" property="productCounts" jdbcType="VARCHAR" />
+    <result column="productAmount" property="productAmount" jdbcType="VARCHAR" />
+    <result column="occurTime" property="occurTime" jdbcType="TIMESTAMP" />
+    <result column="duePayDate" property="duePayDate" jdbcType="DATE" />
+    <result column="payoutTime" property="payoutTime" jdbcType="TIMESTAMP" />
+    <result column="custChatId" property="custChatId" jdbcType="VARCHAR" />
+    <result column="paymentStatus" property="paymentStatus" jdbcType="VARCHAR" />
+    <result column="checkStatus" property="checkStatus" jdbcType="VARCHAR" />
+    <result column="checkTime" property="checkTime" jdbcType="TIMESTAMP" />
+    <result column="hostUuid" property="hostUuid" jdbcType="VARCHAR" />
+    <result column="custUuid" property="custUuid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, floatNum, hostChatId, productName, productCounts, productAmount, occurTime, 
+    duePayDate, payoutTime, custChatId, paymentStatus, checkStatus, checkTime, 
+    hostUuid, custUuid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from record
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from record
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.szb.pojo.Record" >
+    insert into record (Id, floatNum, hostChatId, 
+      productName, productCounts, productAmount, 
+      occurTime, duePayDate, payoutTime, 
+      custChatId, paymentStatus, checkStatus, 
+      checkTime, hostUuid, custUuid
+      )
+    values (#{id,jdbcType=VARCHAR}, #{floatNum,jdbcType=VARCHAR}, #{hostChatId,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{productCounts,jdbcType=VARCHAR}, #{productAmount,jdbcType=VARCHAR}, 
+      #{occurTime,jdbcType=TIMESTAMP}, #{duePayDate,jdbcType=DATE}, #{payoutTime,jdbcType=TIMESTAMP}, 
+      #{custChatId,jdbcType=VARCHAR}, #{paymentStatus,jdbcType=VARCHAR}, #{checkStatus,jdbcType=VARCHAR}, 
+      #{checkTime,jdbcType=TIMESTAMP}, #{hostUuid,jdbcType=VARCHAR}, #{custUuid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.szb.pojo.Record" >
+    insert into record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="floatNum != null" >
+        floatNum,
+      </if>
+      <if test="hostChatId != null" >
+        hostChatId,
+      </if>
+      <if test="productName != null" >
+        productName,
+      </if>
+      <if test="productCounts != null" >
+        productCounts,
+      </if>
+      <if test="productAmount != null" >
+        productAmount,
+      </if>
+      <if test="occurTime != null" >
+        occurTime,
+      </if>
+      <if test="duePayDate != null" >
+        duePayDate,
+      </if>
+      <if test="payoutTime != null" >
+        payoutTime,
+      </if>
+      <if test="custChatId != null" >
+        custChatId,
+      </if>
+      <if test="paymentStatus != null" >
+        paymentStatus,
+      </if>
+      <if test="checkStatus != null" >
+        checkStatus,
+      </if>
+      <if test="checkTime != null" >
+        checkTime,
+      </if>
+      <if test="hostUuid != null" >
+        hostUuid,
+      </if>
+      <if test="custUuid != null" >
+        custUuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="floatNum != null" >
+        #{floatNum,jdbcType=VARCHAR},
+      </if>
+      <if test="hostChatId != null" >
+        #{hostChatId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCounts != null" >
+        #{productCounts,jdbcType=VARCHAR},
+      </if>
+      <if test="productAmount != null" >
+        #{productAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="occurTime != null" >
+        #{occurTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duePayDate != null" >
+        #{duePayDate,jdbcType=DATE},
+      </if>
+      <if test="payoutTime != null" >
+        #{payoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custChatId != null" >
+        #{custChatId,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentStatus != null" >
+        #{paymentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null" >
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hostUuid != null" >
+        #{hostUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="custUuid != null" >
+        #{custUuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szb.pojo.Record" >
+    update record
+    <set >
+      <if test="floatNum != null" >
+        floatNum = #{floatNum,jdbcType=VARCHAR},
+      </if>
+      <if test="hostChatId != null" >
+        hostChatId = #{hostChatId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCounts != null" >
+        productCounts = #{productCounts,jdbcType=VARCHAR},
+      </if>
+      <if test="productAmount != null" >
+        productAmount = #{productAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="occurTime != null" >
+        occurTime = #{occurTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duePayDate != null" >
+        duePayDate = #{duePayDate,jdbcType=DATE},
+      </if>
+      <if test="payoutTime != null" >
+        payoutTime = #{payoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custChatId != null" >
+        custChatId = #{custChatId,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentStatus != null" >
+        paymentStatus = #{paymentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="checkStatus != null" >
+        checkStatus = #{checkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null" >
+        checkTime = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hostUuid != null" >
+        hostUuid = #{hostUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="custUuid != null" >
+        custUuid = #{custUuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szb.pojo.Record" >
+    update record
+    set floatNum = #{floatNum,jdbcType=VARCHAR},
+      hostChatId = #{hostChatId,jdbcType=VARCHAR},
+      productName = #{productName,jdbcType=VARCHAR},
+      productCounts = #{productCounts,jdbcType=VARCHAR},
+      productAmount = #{productAmount,jdbcType=VARCHAR},
+      occurTime = #{occurTime,jdbcType=TIMESTAMP},
+      duePayDate = #{duePayDate,jdbcType=DATE},
+      payoutTime = #{payoutTime,jdbcType=TIMESTAMP},
+      custChatId = #{custChatId,jdbcType=VARCHAR},
+      paymentStatus = #{paymentStatus,jdbcType=VARCHAR},
+      checkStatus = #{checkStatus,jdbcType=VARCHAR},
+      checkTime = #{checkTime,jdbcType=TIMESTAMP},
+      hostUuid = #{hostUuid,jdbcType=VARCHAR},
+      custUuid = #{custUuid,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
