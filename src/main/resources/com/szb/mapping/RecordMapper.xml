@@ -47,103 +47,6 @@
       #{checkTime,jdbcType=TIMESTAMP}, #{hostUuid,jdbcType=VARCHAR}, #{custUuid,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.szb.pojo.Record" >
-    insert into record
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        Id,
-      </if>
-      <if test="floatNum != null" >
-        floatNum,
-      </if>
-      <if test="hostChatId != null" >
-        hostChatId,
-      </if>
-      <if test="productName != null" >
-        productName,
-      </if>
-      <if test="productCounts != null" >
-        productCounts,
-      </if>
-      <if test="productAmount != null" >
-        productAmount,
-      </if>
-      <if test="occurTime != null" >
-        occurTime,
-      </if>
-      <if test="duePayDate != null" >
-        duePayDate,
-      </if>
-      <if test="payoutTime != null" >
-        payoutTime,
-      </if>
-      <if test="custChatId != null" >
-        custChatId,
-      </if>
-      <if test="paymentStatus != null" >
-        paymentStatus,
-      </if>
-      <if test="checkStatus != null" >
-        checkStatus,
-      </if>
-      <if test="checkTime != null" >
-        checkTime,
-      </if>
-      <if test="hostUuid != null" >
-        hostUuid,
-      </if>
-      <if test="custUuid != null" >
-        custUuid,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="floatNum != null" >
-        #{floatNum,jdbcType=VARCHAR},
-      </if>
-      <if test="hostChatId != null" >
-        #{hostChatId,jdbcType=VARCHAR},
-      </if>
-      <if test="productName != null" >
-        #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="productCounts != null" >
-        #{productCounts,jdbcType=VARCHAR},
-      </if>
-      <if test="productAmount != null" >
-        #{productAmount,jdbcType=VARCHAR},
-      </if>
-      <if test="occurTime != null" >
-        #{occurTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="duePayDate != null" >
-        #{duePayDate,jdbcType=DATE},
-      </if>
-      <if test="payoutTime != null" >
-        #{payoutTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="custChatId != null" >
-        #{custChatId,jdbcType=VARCHAR},
-      </if>
-      <if test="paymentStatus != null" >
-        #{paymentStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="checkStatus != null" >
-        #{checkStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="checkTime != null" >
-        #{checkTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="hostUuid != null" >
-        #{hostUuid,jdbcType=VARCHAR},
-      </if>
-      <if test="custUuid != null" >
-        #{custUuid,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.szb.pojo.Record" >
     update record
     <set >
@@ -192,22 +95,55 @@
     </set>
     where Id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.szb.pojo.Record" >
-    update record
-    set floatNum = #{floatNum,jdbcType=VARCHAR},
-      hostChatId = #{hostChatId,jdbcType=VARCHAR},
-      productName = #{productName,jdbcType=VARCHAR},
-      productCounts = #{productCounts,jdbcType=VARCHAR},
-      productAmount = #{productAmount,jdbcType=VARCHAR},
-      occurTime = #{occurTime,jdbcType=TIMESTAMP},
-      duePayDate = #{duePayDate,jdbcType=DATE},
-      payoutTime = #{payoutTime,jdbcType=TIMESTAMP},
-      custChatId = #{custChatId,jdbcType=VARCHAR},
-      paymentStatus = #{paymentStatus,jdbcType=VARCHAR},
-      checkStatus = #{checkStatus,jdbcType=VARCHAR},
-      checkTime = #{checkTime,jdbcType=TIMESTAMP},
-      hostUuid = #{hostUuid,jdbcType=VARCHAR},
-      custUuid = #{custUuid,jdbcType=VARCHAR}
-    where Id = #{id,jdbcType=VARCHAR}
-  </update>
+
+  <select id="selectBySelective" parameterType="com.szb.pojo.Record" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from record
+    where
+    <trim  suffixOverrides=" and" >
+      <if test="floatNum != null" >
+        floatNum = #{floatNum,jdbcType=VARCHAR} and
+      </if>
+      <if test="hostChatId != null" >
+        hostChatId = #{hostChatId,jdbcType=VARCHAR} and
+      </if>
+      <if test="productName != null" >
+        productName = #{productName,jdbcType=VARCHAR} and
+      </if>
+      <if test="productCounts != null" >
+        productCounts = #{productCounts,jdbcType=VARCHAR} and
+      </if>
+      <if test="productAmount != null" >
+        productAmount = #{productAmount,jdbcType=VARCHAR} and
+      </if>
+      <if test="occurTime != null" >
+        occurTime = #{occurTime,jdbcType=TIMESTAMP} and
+      </if>
+      <if test="duePayDate != null" >
+        duePayDate = #{duePayDate,jdbcType=DATE} and
+      </if>
+      <if test="payoutTime != null" >
+        payoutTime = #{payoutTime,jdbcType=TIMESTAMP} and
+      </if>
+      <if test="custChatId != null" >
+        custChatId = #{custChatId,jdbcType=VARCHAR} and
+      </if>
+      <if test="paymentStatus != null" >
+        paymentStatus = #{paymentStatus,jdbcType=VARCHAR} and
+      </if>
+      <if test="checkStatus != null" >
+        checkStatus = #{checkStatus,jdbcType=VARCHAR} and
+      </if>
+      <if test="checkTime != null" >
+        checkTime = #{checkTime,jdbcType=TIMESTAMP} and
+      </if>
+      <if test="hostUuid != null" >
+        hostUuid = #{hostUuid,jdbcType=VARCHAR} and
+      </if>
+      <if test="custUuid != null" >
+        custUuid = #{custUuid,jdbcType=VARCHAR} and
+      </if>
+    </trim>
+  </select>
 </mapper>
