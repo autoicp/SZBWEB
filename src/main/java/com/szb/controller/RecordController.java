@@ -7,6 +7,7 @@ import com.szb.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -42,30 +43,9 @@ public class RecordController {
      * @return
      */
     @RequestMapping("/accountdo")
-    public String accountdo(HttpServletRequest request){
-
-        //获取记账参数
-        String productname = request.getParameter("productname");
-        String productnum = request.getParameter("productnum");
-        String totalamount = request.getParameter("totalamount");
-        String payoutDate = request.getParameter("payoutDate");
-        String[] predate = payoutDate.split("-");
-
-        Long currentTime = System.currentTimeMillis();
-        Timestamp occurTime = new Timestamp(currentTime);
-
-        Record record = new Record();
-        record.setProductName(productname);
-        record.setProductCounts(productnum);
-        record.setProductAmount(totalamount);
-        record.setOccurTime(occurTime);
-        record.setDuePayDate(new Date(Integer.parseInt(predate[0])-1900,Integer.parseInt(predate[1])-1,Integer.parseInt(predate[2])+1));
+    public String accountdo(@ModelAttribute("record") Record record, HttpServletRequest request){
 
         this.recordService.insert(record);
-        request.setAttribute("message" ,"insert success");
-
-        Logger logger = Logger.getLogger(this.getClass());
-        logger.debug("记账一次");
 
         return "accountsuccess";
     }
@@ -163,9 +143,24 @@ public class RecordController {
      * @param request
      */
     @RequestMapping("/topay")
-    public String topay(HttpServletRequest request){
+    public String topay(HttpServletRequest request,@ModelAttribute("record") Record record){
 
         //TODO 把账单信息存到request里
         return "topay";
+    }
+
+    @RequestMapping("/accountsuccess")
+    public String accountsuccess(HttpServletRequest request, @ModelAttribute("record") Record record) {
+        //todo 账单创建成功页 获取1、卖家hostUuid  2、订单ID 需确认record是否能获取
+        request.setAttribute("record",record);
+        return "accountsuccess";
+    }
+
+    @RequestMapping("/accountsuccessdo")
+    public String accountsuccessdo(HttpServletRequest request, @ModelAttribute("record") Record record) {
+        //todo 账单创建成功页 获取1、卖家hostUuid  2、订单ID 需确认record是否能获取
+        record.setCheckStatus("1");
+        this.recordService.updateByPrimaryKeySelective(record);
+        return "accountsuccessdo";
     }
 }
