@@ -23,13 +23,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<span>账单流水号：<span style="color:#99999b;">201711111234567890000</span></span><br />
 				</div>
 				<div class="new  box_app">
-					<span>商&nbsp;品&nbsp;&nbsp;名&nbsp;称：</span><input type="text" id="productname" name="productname" placeholder="请输入商品名称" />
+					<span>商&nbsp;品&nbsp;&nbsp;名&nbsp;称：</span><input type="text" id="productName" name="productName" placeholder="请输入商品名称" />
 				</div>
 				<div class="new  box_app">
-					<span>商&nbsp;品&nbsp;&nbsp;数&nbsp;量：</span><input type="text" id="productnum" name="productnum" placeholder="请输入商品数量" />
+					<span>商&nbsp;品&nbsp;&nbsp;数&nbsp;量：</span><input type="text" id="productCounts" name="productCounts" placeholder="请输入商品数量" />
 				</div>
 				<div class="new  box_app">
-					<span>总 &nbsp;&nbsp;&nbsp;&nbsp;金&nbsp;&nbsp;&nbsp;额：</span><input id="totalamount" name="totalamount" type="text" placeholder="请输入总金额" />
+					<span>总 &nbsp;&nbsp;&nbsp;&nbsp;金&nbsp;&nbsp;&nbsp;额：</span><input id="productAmount" name="productAmount" type="text" placeholder="请输入总金额" />
 				</div>
 				<div class="new  box_app">
 					<span>归&nbsp;还&nbsp;&nbsp;日&nbsp;期：</span>
@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<span class="datespan">六个月</span>&nbsp;
 					<span class="datespan">一年</span><br/><br/><br/> 
 					<span class="datespan">其它日期:<input id="beginTime" class="kbtn" type="text" placeholder="请选择日期" /></span>-->
-					<input id="paydate" class="kbtn" type="text" placeholder="请选择日期" name="payoutDate"/>
+					<input id="paydate" class="kbtn" type="text" placeholder="请选择日期" name="duePayDate"/>
 					<div id="datePlugin"></div>
 				</div>
 				<div class="btn">
@@ -63,27 +63,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				function doSubmit() {
 					var sub = "true";
 					//验证
-					var productname = $.trim($("#productname").val());
-					if(productname == "") {
-						$("#productname").val("");
-						$("#productname").attr("placeholder", "姓名输入错误");
-						$("#productname").addClass("invalid");
+					var productName = $.trim($("#productName").val());
+					if(productName == "") {
+						$("#productName").val("");
+						$("#productName").attr("placeholder", "姓名输入错误");
+						$("#productName").addClass("invalid");
 						sub = "false";
 					}
 					var numReg = /^\d{1,9}$/;
-					var num = $.trim($("#productnum").val());
+					var num = $.trim($("#productCounts").val());
 					if("" == num || !numReg.test(num)) {
-						$("#productnum").val("");
-						$("#productnum").attr('placeholder', '数量输入有误');
-						$("#productnum").addClass("invalid");
+						$("#productCounts").val("");
+						$("#productCounts").attr('placeholder', '数量输入有误');
+						$("#productCounts").addClass("invalid");
 						sub = "false";
 					}
 					var amountReg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
-					var amount = $.trim($("#totalamount").val());
+					var amount = $.trim($("#productAmount").val());
 					if(amount == "" || !amountReg.test(amount)) {
-						$("#totalamount").val("");
-						$("#totalamount").attr('placeholder', '金额输入有误');
-						$("#totalamount").addClass("invalid");
+						$("#productAmount").val("");
+						$("#productAmount").attr('placeholder', '金额输入有误');
+						$("#productAmount").addClass("invalid");
 						sub = "false";
 					}
 					
