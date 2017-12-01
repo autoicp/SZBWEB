@@ -3,21 +3,18 @@ package com.szb.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.Timestamp;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.ibatis.io.Resources;
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;  
-import org.springframework.ui.Model;  
-import org.springframework.web.bind.annotation.RequestMapping;  
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
   
 import com.szb.pojo.User;  
 import com.szb.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.net.URLEncoder;
 
 @SuppressWarnings("restriction")
 @Controller  
@@ -32,7 +29,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/usercenter")
-	public String toIndex1(HttpServletRequest request){
+	public String usercenter(HttpServletRequest request){
 		return "usercenter";
 	}
 
@@ -42,34 +39,61 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/usercenterdo")
-	public String toIndex2(@RequestParam("qrCode") MultipartFile qrCode, HttpServletRequest request){
-		String userName = request.getParameter("userName");
-		String telephone = request.getParameter("telephone");
-		String shopName = request.getParameter("shopName");
-		String shopAddress = request.getParameter("shopAddress");
+	public String usercenterdo(@RequestParam("qrCode") MultipartFile qrCode, @ModelAttribute("user") User user, HttpServletRequest request){
 
-		Long currentTime = System.currentTimeMillis();
-		Timestamp registTime = new Timestamp(currentTime);
+		String insertResult = this.userService.insert(user,qrCode);
 
-		User user = new User();
-		user.setUserName(userName);
-		user.setTelephone(telephone);
-		user.setShopName(shopName);
-		user.setShopAddress(shopAddress);
-		user.setRegistTime(registTime);
-		this.userService.insert(user);
-		user = this.userService.selectBySelective(user);
-		//TODO 收钱码地址暂定为D:\Program Files\tomcat\apache-tomcat-8.0.20\bin\6dc5e11f-d28a-11e7-8d04-e8039a352be6.jpg
-		try {
-			FileUtils.copyInputStreamToFile(qrCode.getInputStream(),new File(new File("").getCanonicalPath()+"\\"+user.getId()+"."+qrCode.getOriginalFilename().split("\\.")[1]));
-		} catch (IOException e) {
-			e.printStackTrace();
-			request.setAttribute("message","上传失败");
-			return "failed";
-		}
+        request.setAttribute("message",insertResult);
 
-		request.setAttribute("message" ,"insert success");
-		return "success";
-	}
+        if (insertResult.startsWith("failed")){
+            return "failed";
+        }else {
+            return "success";
+        }
+    }
 
+    public String deleteByPrimaryKey(String id){
+
+	    //todo 删除用户
+	    return "";
+    }
+
+    /**
+     * 获取code
+     * @param request
+     * @return
+     */
+    @RequestMapping("getCode")
+    public ModelAndView getCode(HttpServletRequest request){
+
+        String appid = "?appid="+"填写公众号的唯一标识";//todo 填写公众号的唯一标识
+        String redirect_uri = "qqq填写回调地址qqq";//todo 填写回调地址
+        redirect_uri = "&redirect_uri="+ URLEncoder.encode(redirect_uri);
+        String response_type = "&response_type=code";//获取code
+        String scope = "&scope=snsapi_userinfo";//如果只获取openid则选snsapi_base
+        String wechat_redirect = "#wechat_redirect";
+        String preView = "https://open.weixin.qq.com/connect/oauth2/authorize";
+        String view = appid + redirect_uri + response_type + scope + wechat_redirect;
+        String url = preView+view;
+        return new ModelAndView(new RedirectView(url));
+    }
+
+    /**
+     * 通过code获取网页授权access_token
+     * @param request
+     * @return
+     */
+    @RequestMapping("getAccess_token")
+    public ModelAndView getAccess_token(HttpServletRequest request){
+
+        String appid = "?appid="+"填写公众号的唯一标识";//todo 填写公众号的唯一标识
+        String secret = "&secret=qqq公众号的appsecretqqq";//todo 公众号的appsecret
+        String code = "&code=" + request.getParameter("code");//获取到的code
+        String grant_type = "&grant_type=填写为authorization_code";//填写为authorization_code
+
+        String preView = "https://api.weixin.qq.com/sns/oauth2/access_token";
+        String view = appid + secret + code + grant_type;
+        String url = preView+view;
+        return new ModelAndView(new RedirectView(url));
+    }
 }
