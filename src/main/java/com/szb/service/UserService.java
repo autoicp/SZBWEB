@@ -1,11 +1,12 @@
 package com.szb.service;
 
 import com.szb.pojo.User;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface UserService {
     public int deleteByPrimaryKey(String id);
 
-    public int insert(User user);
+    public String insert(User user,MultipartFile qrCode);
 
     public User selectByPrimaryKey(String id);
 
