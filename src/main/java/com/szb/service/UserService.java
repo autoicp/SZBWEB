@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface UserService {
     public int deleteByPrimaryKey(String id);
 
-    public String insert(User user,MultipartFile qrCode);
+    public String insert(User user, MultipartFile qrCode);
 
     public User selectByPrimaryKey(String id);
 
